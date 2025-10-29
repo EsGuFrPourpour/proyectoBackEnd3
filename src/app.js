@@ -2,26 +2,28 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
-
 import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
 import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
 import mocksRouter from './routes/mocks.router.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './docs/swagger.js';
 
 const app = express();
-const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`mongodb://localhost:27017/db_example?directConnection=true`)
+const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cookieParser());
 
-
-app.use('/api/users',usersRouter);
-app.use('/api/pets',petsRouter);
-app.use('/api/adoptions',adoptionsRouter);
-app.use('/api/sessions',sessionsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/pets', petsRouter);
+app.use('/api/adoptions', adoptionsRouter);
+app.use('/api/sessions', sessionsRouter);
 app.use('/api/mocks', mocksRouter);
+
+// Swagger UI for API docs
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get('/', (req, res) => {
     const style = `
@@ -38,6 +40,5 @@ app.get('/', (req, res) => {
     res.send(`${style}${content}`);
 });
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port http://localhost:${PORT}`);
-});
+// Export app for testing. Server (connection + listen) is implemented in src/server.js
+export default app;
