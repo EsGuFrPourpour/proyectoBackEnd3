@@ -30,9 +30,9 @@ Subir la imagen a Docker Hub (después de iniciar sesión con `docker login`):
 docker push tu-usuario-docker/adoptme-backend:latest
 ```
 
-Enlace de la imagen en Docker Hub (reemplaza con tu repo):
+Enlace de la imagen en Docker Hub (tu repo):
 
-https://hub.docker.com/r/tu-usuario-docker/adoptme-backend
+https://hub.docker.com/repository/docker/wizartcleon/adoptme-backend/general
 
 ## Publicación automática con GitHub Actions
 
@@ -67,7 +67,7 @@ docker push tu-usuario-docker/adoptme-backend:latest
 Ejecutar el contenedor:
 
 ```sh
-docker run -p 8080:8080 -e MONGO_URI="mongodb://host.docker.internal:27017/db_example" tu-usuario-docker/adoptme-backend:latest
+docker run -p 8080:8080 -e MONGO_URI="mongodb://host.docker.internal:28017/db_example" wizartcleon/adoptme-backend:latest
 ```
 
 Nota: si tu MongoDB se ejecuta en la máquina host, al correr en Docker usa `host.docker.internal` (Windows/Mac).

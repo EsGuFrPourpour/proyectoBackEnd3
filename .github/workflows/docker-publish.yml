@@ -29,4 +29,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/adoptme-backend:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/adoptme-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/adoptme-backend:${{ github.sha }}
